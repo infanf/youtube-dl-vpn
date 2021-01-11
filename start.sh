@@ -1,0 +1,1 @@
+docker-compose run --rm -u 1000 --service-ports ydl bash

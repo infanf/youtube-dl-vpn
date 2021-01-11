@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  ydl:
+    build: .
+    container_name: ydl
+    network_mode: service:gluetun
+    volumes:
+      - ${PWD}:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    depends_on: [gluetun]
+  
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - OPENVPN_USER=${PIA_USER}
+      - OPENVPN_PASSWORD=${PIA_PASS}
+      - REGION=US New York,US East
+    ports:
+      - 8000:8000/tcp
+      - 9000:9000/tcp

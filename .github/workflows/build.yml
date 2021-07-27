@@ -27,7 +27,10 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: infanf/youtube-dl-vpn:latest
+          tags: infanf/youtube-dl:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+      -
+        name: Tag and Push
+        run: export VERSION=$(docker run infanf/youtube-dl:latest youtube-dl --version) && docker tag infanf/youtube-dl:latest infanf/youtube-dl:$VERSION && docker push infanf/youtube-dl:$VERSION

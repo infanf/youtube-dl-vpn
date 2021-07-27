@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   ydl:
-    image: infanf/youtube-dl-vpn
+    image: infanf/youtube-dl
     container_name: ydl
     network_mode: service:gluetun
     volumes:

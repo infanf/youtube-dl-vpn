@@ -31,11 +31,6 @@ jobs:
         with:
           cmd: 'curl -s https://pypi.org/pypi/youtube_dl/json | jq -r .info.version'
       -
-        name: Show ydl version
-        shell: bash
-        run: |
-          echo "Version: ${{ steps.version.outputs.value }}"
-      -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2

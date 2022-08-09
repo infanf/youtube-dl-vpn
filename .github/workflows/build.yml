@@ -26,11 +26,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Get ydl version
+        name: Get yt-dl version
         uses: sergeysova/jq-action@v2
         id: version
         with:
           cmd: 'curl -s https://pypi.org/pypi/youtube_dl/json | jq -r .info.version'
+      -
+        name: Get yt-dlp version
+        uses: sergeysova/jq-action@v2
+        id: versionp
+        with:
+          cmd: 'curl -s https://pypi.org/pypi/yt_dlp/json | jq -r .info.version'
       -
         name: Build and push
         id: docker_build
@@ -40,7 +46,9 @@ jobs:
           push: true
           tags: |
             infanf/youtube-dl:latest
+            infanf/yt-dlp:latest
             infanf/youtube-dl:${{ steps.version.outputs.value }}
+            infanf/yt-dlp:${{ steps.versionp.outputs.value }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

@@ -36,12 +36,14 @@ jobs:
         id: existing-image-ytdl
         uses: javajawa/check-registry-for-image@v1
         with:
+          registry: docker.io
           repository: infanf/youtube-dl
           tag: ytdl-${{ steps.version.outputs.value }}
       - name: Check for existing image yt-dlp
         id: existing-image-ytdlp
         uses: javajawa/check-registry-for-image@v1
         with:
+          registry: docker.io
           repository: infanf/youtube-dl
           tag: ytdlp-${{ steps.versionp.outputs.value }}
       - name: Build and push

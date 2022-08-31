@@ -34,21 +34,25 @@ jobs:
           cmd: "curl -s https://pypi.org/pypi/yt_dlp/json | jq -r .info.version"
       - name: Check for existing image yt-dl
         id: existing-image-ytdl
-        uses: javajawa/check-registry-for-image@v1
+        uses: hipcamp/docker-tag-exists@v1
         with:
-          registry: docker.io
-          repository: infanf/youtube-dl
+          image: infanf/youtube-dl
           tag: ytdl-${{ steps.version.outputs.value }}
       - name: Check for existing image yt-dlp
         id: existing-image-ytdlp
-        uses: javajawa/check-registry-for-image@v1
+        uses: hipcamp/docker-tag-exists@v1
         with:
-          registry: docker.io
-          repository: infanf/youtube-dl
+          image: infanf/youtube-dl
           tag: ytdlp-${{ steps.versionp.outputs.value }}
+      - id: check-docker
+        name: Check Docker for Tag
+        uses: hipcamp/docker-tag-exists@v1
+        with:
+          image: library/ubuntu
+          tag: 20.04
       - name: Build and push
         id: docker_build
-        if: ${{ steps.existing-image-ytdl.outputs.exists == 'false' && steps.existing-image-ytdlp.outputs.exists == 'false'}}
+        if: ${{ steps.existing-image-ytdl.outputs.tag-exists == 'false' && steps.existing-image-ytdlp.outputs.tag-exists == 'false'}}
         uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v7

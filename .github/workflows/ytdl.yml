@@ -1,4 +1,4 @@
-name: build and push
+name: Build youtube-dl
 
 on:
   workflow_dispatch:
@@ -9,7 +9,10 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  docker:
+  ffmpeg:
+    uses: ./.github/workflows/ffmpeg.yml
+  build:
+    needs: [ffmpeg]
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -44,12 +47,6 @@ jobs:
         with:
           image: infanf/youtube-dl
           tag: ytdlp-${{ steps.versionp.outputs.value }}
-      - id: check-docker
-        name: Check Docker for Tag
-        uses: hipcamp/docker-tag-exists@v1
-        with:
-          image: library/ubuntu
-          tag: 20.04
       - name: Build and push
         id: docker_build
         if: ${{ steps.existing-image-ytdl.outputs.tag-exists == 'false' || steps.existing-image-ytdlp.outputs.tag-exists == 'false'}}

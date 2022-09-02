@@ -1,3 +1,3 @@
 # youtube-dl-vpn
 
-[![build and push](https://github.com/infanf/youtube-dl-vpn/actions/workflows/build.yml/badge.svg)](https://github.com/infanf/youtube-dl-vpn/actions/workflows/build.yml)
+[![docker build](https://github.com/infanf/youtube-dl-vpn/actions/workflows/ytdl.yml/badge.svg)](https://github.com/infanf/youtube-dl-vpn/actions/workflows/ytdl.yml)

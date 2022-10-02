@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=5.1.1
+VERSION=5.1.2
 
 sed -i 's/main/main non-free/' /etc/apt/sources.list
 

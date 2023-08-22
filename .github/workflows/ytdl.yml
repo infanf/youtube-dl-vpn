@@ -23,7 +23,7 @@ jobs:
         uses: hipcamp/docker-tag-exists@v1
         with:
           image: infanf/ffmpeg
-          tag: '5.1.2'
+          tag: '6.0'
       - name: Set up QEMU
         if: ${{ steps.existing-image.outputs.tag-exists == 'false'}}
         uses: docker/setup-qemu-action@v1
@@ -40,7 +40,7 @@ jobs:
           push: true
           tags: |
             infanf/ffmpeg:latest
-            infanf/ffmpeg:5.1.2
+            infanf/ffmpeg:6.0
       - name: Image digest
         if: ${{ steps.existing-image.outputs.tag-exists == 'false'}}
         run: echo ${{ steps.docker_build.outputs.digest }}

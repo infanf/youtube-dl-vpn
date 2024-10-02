@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=6.1
+VERSION=7.1
 
 sed -i 's/main/main non-free/' /etc/apt/sources.list.d/debian.sources
 
